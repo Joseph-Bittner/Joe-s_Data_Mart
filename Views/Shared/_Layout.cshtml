@@ -4,22 +4,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Joe's Data Mart</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'datamart-primary': '#667eea',
-                        'datamart-secondary': '#764ba2',
-                    }
-                }
-            }
-        }
-    </script>
+    <!-- Tailwind build output for shared application styling. -->
+    <link rel="stylesheet" href="~/css/tailwind.css" asp-append-version="true" />
+    <!-- Site-specific overrides and utility styles. -->
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
 <body class="min-h-screen bg-gradient-to-br from-datamart-primary to-datamart-secondary flex flex-col">
+    <!-- Global navigation header. -->
     <header class="bg-white/90 backdrop-blur-sm shadow-lg">
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
@@ -32,21 +23,27 @@
                     <a href="/" class="text-gray-700 hover:text-datamart-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">
                         Home
                     </a>
+                    <a href="/Home/ShipCount" class="text-gray-700 hover:text-datamart-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                        Ship Count
+                    </a>
                 </div>
             </div>
         </nav>
     </header>
     <div class="flex-1">
+        <!-- Page content from the active view. -->
         <main class="py-8">
             @RenderBody()
         </main>
     </div>
 
+    <!-- Global footer. -->
     <footer class="bg-white/90 backdrop-blur-sm border-t border-gray-200 py-4">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <p class="text-gray-600">&copy; 2026 - Joe's Data Mart - Built with ASP.NET Core & Tailwind CSS</p>
         </div>
     </footer>
+    <!-- Shared client scripts and optional page-level script section. -->
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)

@@ -1,6 +1,6 @@
 # DeveloperJosephBittner Data Mart
 
-This is an ASP.NET Core MVC web application that provides a user-friendly interface for interacting with SQL Server databases. The application features a modern, responsive design built with **Tailwind CSS** and connects to the `DeveloperJosephBittner` database on the `vFS-SQL02-NS` server.
+This is an ASP.NET Core MVC web application that provides a user-friendly interface for interacting with SQL Server databases. The application features a modern, responsive design built with **Tailwind CSS** and connects to the `DeveloperJosephBittner` database on the `SQL` server.
 
 ## How to run
 
@@ -11,7 +11,7 @@ This is an ASP.NET Core MVC web application that provides a user-friendly interf
 
 2. (Optional) Override the connection string via an environment variable:
    ```powershell
-   $env:DATA_MART_CONNECTION_STRING = "Server=vFS-SQL02-NS;Database=DeveloperJosephBittner;Trusted_Connection=True;TrustServerCertificate=True;"
+   $env:DATA_MART_CONNECTION_STRING = "Server=SQL Server;Database=DeveloperJosephBittner;Trusted_Connection=True;TrustServerCertificate=True;"
    ```
 
 3. Run the app:
