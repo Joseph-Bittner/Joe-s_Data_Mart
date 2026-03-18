@@ -10,7 +10,7 @@
             <p class="mt-2 text-gray-600">Search an item number to see shipment rows from DETAL1, then click a shipment to view details from DETAL1 + STAGE.</p>
         </div>
 
-        <form asp-action="ShipCount" method="post" class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+        <form asp-action="ShipCount" method="post" class="grid grid-cols-1 md:grid-cols-5 gap-4 items-end">
             <div class="md:col-span-3">
                 <label for="ItemNumber" class="block text-sm font-semibold text-gray-700 mb-2">Item Number</label>
                 <input asp-for="ItemNumber" id="ItemNumber" type="text" placeholder="e.g. 151018"
@@ -21,6 +21,14 @@
                 <button type="submit"
                         class="w-full bg-gradient-to-r from-datamart-primary to-datamart-secondary text-white font-semibold py-3 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200">
                     Search Item
+                </button>
+            </div>
+
+            <div>
+                <button type="button"
+                        class="w-full bg-white text-gray-800 font-semibold py-3 px-6 rounded-xl border border-gray-300 shadow-sm hover:bg-gray-50 transition-all duration-200"
+                        onclick="openRawRows()">
+                    Raw Row JSON
                 </button>
             </div>
         </form>
@@ -116,9 +124,6 @@
                                                 <div class="rounded-xl border border-gray-200 bg-white p-4">
                                                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-sm">
                                                         <div><span class="text-gray-500">Load Date Source</span><p class="font-semibold text-gray-800">@(string.IsNullOrWhiteSpace(shipment.LoadDateSource) ? "N/A" : shipment.LoadDateSource)</p></div>
-                                                        <div><span class="text-gray-500">Time of Day</span><p class="font-semibold text-gray-800">@(string.IsNullOrWhiteSpace(shipment.TimeOfDay) ? "N/A" : shipment.TimeOfDay)</p></div>
-                                                        <div><span class="text-gray-500">Load Door</span><p class="font-semibold text-gray-800">@(string.IsNullOrWhiteSpace(shipment.LoadDoor) ? "N/A" : shipment.LoadDoor)</p></div>
-                                                        <div><span class="text-gray-500">Load Picker</span><p class="font-semibold text-gray-800">@(string.IsNullOrWhiteSpace(shipment.LoadPicker) ? "N/A" : shipment.LoadPicker)</p></div>
                                                         <div><span class="text-gray-500">Product Type</span><p class="font-semibold text-gray-800">@(string.IsNullOrWhiteSpace(shipment.ProductType) ? "N/A" : shipment.ProductType)</p></div>
                                                         <div><span class="text-gray-500">Item Category Group</span><p class="font-semibold text-gray-800">@(string.IsNullOrWhiteSpace(shipment.ItemCategoryGroup) ? "N/A" : shipment.ItemCategoryGroup)</p></div>
                                                         <div><span class="text-gray-500">Qty Ordered</span><p class="font-semibold text-gray-800">@shipment.QuantityOrdered.ToString("N2")</p></div>
@@ -126,8 +131,6 @@
                                                         <div><span class="text-gray-500">Price Per Unit</span><p class="font-semibold text-gray-800">@shipment.PricePerUnit.ToString("C2")</p></div>
                                                         <div><span class="text-gray-500">Total Cost of Shipped</span><p class="font-semibold text-gray-800">@shipment.TotalCostShipped.ToString("C2")</p></div>
                                                         <div><span class="text-gray-500">Total Ship Net Weight</span><p class="font-semibold text-gray-800">@shipment.TotalShipNetWeight.ToString("N2")</p></div>
-                                                        <div><span class="text-gray-500">Stacks</span><p class="font-semibold text-gray-800">@(shipment.Stacks.HasValue ? shipment.Stacks.Value.ToString("N2") : "N/A")</p></div>
-                                                        <div><span class="text-gray-500">Total Stacks</span><p class="font-semibold text-gray-800">@(string.IsNullOrWhiteSpace(shipment.TotalStacks) ? "N/A" : shipment.TotalStacks)</p></div>
                                                     </div>
                                                 </div>
                                             </td>
@@ -164,16 +167,36 @@
     </style>
 
     <script>
-        // Toggles one shipment detail row without posting back to the server.
+        // Simple client-side expand/collapse for the detail row.
         function toggleShipmentDetails(panelId, button) {
             const panel = document.getElementById(panelId);
-            if (!panel) {
+            if (!panel) return;
+
+            const isHidden = panel.style.display === 'none' || panel.style.display === '';
+
+            // Toggle off if already visible.
+            if (!isHidden) {
+                panel.style.display = 'none';
+                button.textContent = 'View Details';
                 return;
             }
 
-            const isHidden = panel.style.display === 'none' || panel.style.display === '';
-            panel.style.display = isHidden ? 'table-row' : 'none';
-            button.textContent = isHidden ? 'Hide Details' : 'View Details';
+            // Reveal the panel when currently hidden.
+            panel.style.display = 'table-row';
+            button.textContent = 'Hide Details';
+        }
+
+        // Opens item-level raw rows JSON in a new tab for diagnostics.
+        function openRawRows() {
+            const itemInput = document.getElementById('ItemNumber');
+            const itemNumber = itemInput ? itemInput.value.trim() : '';
+            if (!itemNumber) {
+                alert('Enter an item number first.');
+                return;
+            }
+
+            const url = `/Home/RawRows?itemNumber=${encodeURIComponent(itemNumber)}`;
+            window.open(url, '_blank', 'noopener');
         }
     </script>
 }
