@@ -291,7 +291,7 @@ ORDER BY
                     ItemCategoryGroup = reader.IsDBNull(8) ? null : reader.GetString(8),
                     LoadDoor = reader.IsDBNull(12) ? null : reader.GetString(12),
                     LoadPicker = reader.IsDBNull(13) ? null : reader.GetString(13),
-                    Stacks = reader.IsDBNull(14) ? (decimal?)null : reader.GetDecimal(14),
+                    Stacks = reader.IsDBNull(14) ? null : reader.GetDecimal(14),
                     TotalStacks = reader.IsDBNull(15) ? null : reader.GetString(15),
                     Description = reader.IsDBNull(2) ? null : reader.GetString(2)
                 };

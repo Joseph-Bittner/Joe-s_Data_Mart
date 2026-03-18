@@ -408,3 +408,7 @@ C:\Users\joseph.bittner\source\DataMart\obj\Debug\net10.0\staticwebassets.develo
 C:\Users\joseph.bittner\source\DataMart\obj\Debug\net10.0\staticwebassets.build.endpoints.json
 C:\Users\joseph.bittner\source\DataMart\obj\Debug\net10.0\swae.build.ex.cache
 C:\Users\joseph.bittner\source\DataMart\obj\Debug\net10.0\compressed\x1pftma3ze-{0}-ouz4x9gfow-ouz4x9gfow.gz
+C:\Users\joseph.bittner\source\DataMart\obj\Debug\net10.0\DeveloperJosephBittner.DataMart.sourcelink.json
+C:\Users\joseph.bittner\source\DataMart\bin\Debug\net10.0\package-lock.json
+C:\Users\joseph.bittner\source\DataMart\bin\Debug\net10.0\package.json
+C:\Users\joseph.bittner\source\DataMart\obj\Debug\net10.0\compressed\ljq7iuch1s-{0}-1y7ohg3sbh-1y7ohg3sbh.gz

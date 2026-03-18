@@ -15,9 +15,8 @@ This is an ASP.NET Core MVC web application that provides a user-friendly interf
    ```
 
 3. Run the app:
-   ```powershell
-   & "C:\Program Files\dotnet\dotnet" run --project DeveloperJosephBittner.DataMart.csproj
-   ```
+ PS C:\Program Files\dotnet> .\dotnet.exe run --project C:\Users\joseph.bittner\source\DataMart\DeveloperJosephBittner.DataMart.csproj
+ 
 
 4. Open a web browser and navigate to `https://localhost:5001` (or the URL shown in the console).
 
